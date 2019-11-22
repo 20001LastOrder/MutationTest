@@ -56,3 +56,17 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
+# IntelliJ IDEA Files
+*.iml
+*.ipr
+*.iws
+*.idea
+
+*.DS_Store
+Thumbs.db
+*.sw?
+.#*
+*#
+*~
+*.sublime-*
