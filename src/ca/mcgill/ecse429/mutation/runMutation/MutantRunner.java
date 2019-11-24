@@ -34,7 +34,7 @@ public class MutantRunner {
 			};
 			//create new class loader
 			var loader = new URLClassLoader(urls);
-			var aClass = loader.loadClass("SimpleAssertion");
+			var aClass = loader.loadClass("TestMethodsCalTest");
 			runTest(aClass);
 			
 		} catch (MalformedURLException e) {

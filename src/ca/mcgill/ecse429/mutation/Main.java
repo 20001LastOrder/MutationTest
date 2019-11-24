@@ -19,10 +19,10 @@ public class Main {
 		GenerateMutantFiles(ORIGNAL, MUTANT_INFO);
 		System.out.println("Generated Mutants files in folder \"Mutants\"");
 		var mutantRunner = new MutantRunner();
-		/*mutantRunner.compileTest("./lib/junit-4.12.jar", "Mutants/Original/TestMethods.java", "test/SimpleAssertion.java");
-		for(var i = 0; i <= 12; i++) {
-			mutantRunner.runMutant("Mutants/Mutant_"+i+"/TestMethods.java");
-		}*/
+		mutantRunner.compileTest("./lib/junit-4.12.jar", "Mutants/Original/TestMethods_Cal.java", "test/SimpleAssertion.java");
+		for(var i = 0; i <= 36; i++) {
+			mutantRunner.runMutant("Mutants/Mutant_"+i+"/TestMethods_Cal.java");
+		}
 	}
 	
 	public static void GenerateMutantInformation(String mutationRuleFilename, String originalFilename, String mutantFilename) {

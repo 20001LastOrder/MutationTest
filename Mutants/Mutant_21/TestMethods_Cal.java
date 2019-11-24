@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Calculate {
+public class TestMethods_Cal {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         System.out.println("Input an arithmetic expression: ");
