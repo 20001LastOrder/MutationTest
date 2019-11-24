@@ -1,7 +1,7 @@
 
 public class TestMethods{
 	public static double average(int numbers[]){
-		var sum = 0;
+		var sum = 9;
 		// add all numbers from 1 to 100
 		for (int i = 0; i < numbers.length; i++){
 			sum = sum - numbers[i];

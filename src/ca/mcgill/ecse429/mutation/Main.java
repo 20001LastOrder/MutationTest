@@ -9,7 +9,7 @@ import ca.mcgill.ecse429.mutation.runMutation.MutantRunner;
 
 public class Main {
 	public static final String MUTANT_RULE = "mutationRule.txt";
-	public static final String ORIGNAL = "TestMethods.java";
+	public static final String ORIGNAL = "TestMethods_Cal.java";
 	public static final String MUTANT_INFO = "result.csv";
 	
 	public static void main(String[] args) throws MalformedURLException {
@@ -19,10 +19,10 @@ public class Main {
 		GenerateMutantFiles(ORIGNAL, MUTANT_INFO);
 		System.out.println("Generated Mutants files in folder \"Mutants\"");
 		var mutantRunner = new MutantRunner();
-		mutantRunner.compileTest("./lib/junit-4.12.jar", "Mutants/Original/TestMethods.java", "test/SimpleAssertion.java");	
+		/*mutantRunner.compileTest("./lib/junit-4.12.jar", "Mutants/Original/TestMethods.java", "test/SimpleAssertion.java");
 		for(var i = 0; i <= 12; i++) {
 			mutantRunner.runMutant("Mutants/Mutant_"+i+"/TestMethods.java");
-		}
+		}*/
 	}
 	
 	public static void GenerateMutantInformation(String mutationRuleFilename, String originalFilename, String mutantFilename) {
