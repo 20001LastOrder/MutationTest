@@ -2,7 +2,11 @@ package ca.mcgill.ecse429.mutation;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -78,16 +82,18 @@ public final class Utils {
 	 */
 	public static void generateMutantFiles(List<MutantInformation> mutantInfos, String originalFilename) {
 		final var mutantDir = "Mutants";
-		var originalContents = readFile(originalFilename);
+		var originalContents = readFile(Main.SOURCE_PATH + originalFilename);
+		
 		//create mutant folder
-		new File(mutantDir).mkdir();
+		//new File(mutantDir).mkdir();
 		
 		//copy original file first
 		var originalFileFolder = mutantDir + "/Original/";
-		new File(originalFileFolder).mkdir();
+		//new File(originalFileFolder).mkdir();
 		try {
+			createDirectoriesFor(originalFileFolder + "/" + originalFilename);
 			outputToFile(originalFileFolder + "/" + originalFilename, originalContents);
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -98,11 +104,17 @@ public final class Utils {
 			var fileDir = mutantDir + "/Mutant_" + info.getId();
 			new File(fileDir).mkdir();
 			try {
+				createDirectoriesFor(fileDir + "/" + originalFilename);
 				outputToFile(fileDir + "/" + originalFilename, mutatedContents);
-			} catch (FileNotFoundException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}	
+	}
+	
+	public static void createDirectoriesFor(String filePath) throws IOException {
+		Path fp = Paths.get(filePath);
+	    Files.createDirectories(fp.getParent());
 	}
 	
 	/**

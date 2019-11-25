@@ -1,0 +1,7 @@
+Mutants\Mutant_2\calculator\Calculator.java:11: error: bad operand types for binary operator '/'
+        System.out.println(s/"="+calculate(s));
+                            ^
+  first type:  String
+  second type: String
+1 error
+Compilation Failed, Mutant killed by the compiler
