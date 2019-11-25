@@ -21,4 +21,23 @@ public class TestMethodsCalTest {
         var result = Calculator.calculate("1+2");
         assertEquals(3, result, 0.01);
     }
+
+
+    @Test
+    public void MinusTest() {
+        var result = Calculator.calculate("1-2");
+        assertEquals(-1, result, 0.01);
+    }
+
+    @Test
+    public void MultiplyTest() {
+        var result = Calculator.calculate("1*2");
+        assertEquals(2, result, 0.01);
+    }
+
+    @Test
+    public void DivisionTest() {
+        var result = Calculator.calculate("1/2");
+        assertEquals(0.5, result, 0.01);
+    }
 }

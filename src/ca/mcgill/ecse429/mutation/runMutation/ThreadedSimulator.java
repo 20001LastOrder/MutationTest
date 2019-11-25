@@ -9,15 +9,17 @@ public class ThreadedSimulator {
 	class Task extends Thread{
 		private MutantRunner r;
 		private List<String> mutantFolders;
-		public Task(MutantRunner r, List<String> mutantFolders) {
+		private int startIndex;
+		public Task(MutantRunner r, List<String> mutantFolders, int startIndex) {
 			super();
 			this.r = r;
 			this.mutantFolders = mutantFolders;
+			this.startIndex = startIndex;
 		}
 		
 		public void run() {
-	        for(var folder : mutantFolders) {
-	        	r.runMutant(folder);
+	        for(var i = 0; i < mutantFolders.size(); i++) {
+	        	r.runMutant(mutantFolders.get(i), i + startIndex);
 	        }
 	    }
 	}
@@ -35,7 +37,8 @@ public class ThreadedSimulator {
 		
 		var startingIndex = 0;
 		for(var i = 0; i < numThreads; i++) {
-			 var task = new Task(r, mutantFolders.subList(startingIndex, startingIndex + mutantsNumbers[i]));
+			 var task = new Task(r, mutantFolders.subList(startingIndex, startingIndex + mutantsNumbers[i])
+					 			,startingIndex);
 			 tasks.add(task);
 			 
 			 startingIndex += mutantsNumbers[i];

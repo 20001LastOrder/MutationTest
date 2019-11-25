@@ -6,7 +6,7 @@ import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.tools.JavaCompiler;
@@ -24,8 +24,9 @@ public class MutantRunner {
 	private List<Result> results;
 	
 	public MutantRunner(String originalClassName, String testClass, String classPathFolder,
-			String externalLibPath) {
-		results = new ArrayList<Result>();
+			String externalLibPath, int mutantSize) {
+		//+1 for the original file
+		results = Arrays.asList(new Result[mutantSize+1]);
 		this.originalClassName = originalClassName;
 		this.classPathFolder = new File(classPathFolder);
 		this.externalLibPath = externalLibPath;
@@ -39,7 +40,7 @@ public class MutantRunner {
 	 * @param mutantDirectory
 	 * @param testClassName
 	 */
-	public void runMutant(String mutantDirectory) {
+	public void runMutant(String mutantDirectory, int id) {
 		try {
 			
 			var sutFile = new File(mutantDirectory + originalClassName); 
@@ -52,6 +53,7 @@ public class MutantRunner {
 			var output = new PrintStream(reportFile);
 			if(!compile(files, output, output)) {
 				output.println("Compilation Failed, Mutant killed by the compiler");
+				addResult(null, id);
 				return;
 			}
 			
@@ -70,7 +72,7 @@ public class MutantRunner {
 			var report = logTest(result);
 			output.println(report);
 			output.close();
-			addResult(result);
+			addResult(result, id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -104,8 +106,8 @@ public class MutantRunner {
 		return result;
 	}
 	
-	private synchronized void addResult(Result result) {
-		results.add(result);
+	private synchronized void addResult(Result result, int id) {
+		results.set(id, result);
 	}
 	
 	public List<Result> getResults(){

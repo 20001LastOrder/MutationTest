@@ -1,5 +1,7 @@
 Compilation Succeed
 -----------------------------------------------
-Test Successful: true
-2 Test run in 8ms. Passed 2, Ignored 0, Failed 0
+Test Successful: false
+5 Test run in 12ms. Passed 4, Ignored 0, Failed 1
+Test cases killed mutants: 
+DivisionTest(TestMethodsCalTest): expected:<0.5> but was:<3.0>
 

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.junit.runner.Result;
+
 public final class Utils {
 	
 	// output a list of string (lines) to a file
@@ -137,5 +139,49 @@ public final class Utils {
 		mutantLine.replace(startIndex, endIndex, info.getMutantInfo());
 		mutantContents.set(info.getLineNumber() - 1, mutantLine.toString());
 		return mutantContents;
+	}
+	
+	public static void outputSimulationReport(String filename, List<String> mutationContents, List<Result> simulationResults) throws FileNotFoundException {
+		// first add some more header info in the csv
+		var header = mutationContents.get(0);
+		header += ", Status, Killed by";
+		mutationContents.set(0, header);
+		var killCount = 0;
+		for(var i = 0; i < simulationResults.size(); i++) {
+			// mutation contents is off by one because of the header
+			var mutantProperty = mutationContents.get(i+1);
+			var result = simulationResults.get(i);
+			
+			//mutant killed by compiler
+			if(result == null) {
+				mutantProperty += ", Killed, Compiler";
+				mutationContents.set(i+1, mutantProperty);
+				killCount ++;
+				continue;
+			}
+			
+			// mutant alive
+			if(result.wasSuccessful()) {
+				mutantProperty += ", Alive, None";
+				mutationContents.set(i+1, mutantProperty);
+				continue;
+			}
+			
+			// mutant killed
+			killCount++;
+			mutantProperty += ", Killed, ";
+			for(var failures : result.getFailures()) {
+				mutantProperty += failures.getTestHeader() + "; ";
+			}
+			mutationContents.set(i+1, mutantProperty);
+		}
+		
+		var mutationTestConclusion = "Conclusion, " + killCount + " mutants are killed out of " + (simulationResults.size()-1) + " mutants";
+		var mutationRatio = "Mutation Ratio, " + ((double) killCount / (simulationResults.size()-1));
+		mutationContents.add(mutationTestConclusion);
+		mutationContents.add(mutationRatio);
+		
+		// write file
+		outputToFile(filename, mutationContents);
 	}
 }
