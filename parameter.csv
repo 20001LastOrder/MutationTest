@@ -1,0 +1,7 @@
+﻿MUTANT_RULE,mutationRule.txt
+ORIGINAL,calculator/Calculator.java
+TEST,TestMethodsCalTest.java
+MUTANT_INFO,result.csv
+SOURCE_PATH,./
+CLASS_PATH,binary/
+EXTERNAL_LIB,./lib/*
