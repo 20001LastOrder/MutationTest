@@ -1,14 +1,18 @@
 package ca.mcgill.ecse429.mutation;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import org.junit.runner.Result;
@@ -82,9 +86,9 @@ public final class Utils {
 	 * @param mutantInfos: a set of mutant information generated for the file
 	 * @param originalFilename: the original file information
 	 */
-	public static void generateMutantFiles(List<MutantInformation> mutantInfos, String originalFilename) {
+	public static void generateMutantFiles(String sourcePath ,List<MutantInformation> mutantInfos, String originalFilename) {
 		final var mutantDir = "Mutants";
-		var originalContents = readFile(Main.SOURCE_PATH + originalFilename);
+		var originalContents = readFile(sourcePath + originalFilename);
 		
 		//create mutant folder
 		//new File(mutantDir).mkdir();
@@ -114,6 +118,28 @@ public final class Utils {
 		}	
 	}
 	
+	public static MutationParameter readParameters(String fileName) throws IllegalArgumentException, IllegalAccessException {
+		var parameter = new MutationParameter();
+		Map<String, String> map = new HashMap<String, String>();
+		BufferedReader br = null;
+		String line = "";
+		String csvSplitor =",";
+		try {
+			br = new BufferedReader(new FileReader(fileName));
+			while((line= br.readLine())!= null) {
+				String[] content = line.split(csvSplitor);
+				map.put(content[0].strip().toLowerCase(),content[1]);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		for(var field : parameter.getClass().getFields()) {
+			var value = map.get(field.getName().toLowerCase());
+			field.set(parameter, value);
+		}
+		return parameter;
+	}
+	
 	public static void createDirectoriesFor(String filePath) throws IOException {
 		Path fp = Paths.get(filePath);
 	    Files.createDirectories(fp.getParent());
@@ -141,6 +167,13 @@ public final class Utils {
 		return mutantContents;
 	}
 	
+	/**
+	 * Output the simulation report to a file
+	 * @param filename
+	 * @param mutationContents
+	 * @param simulationResults
+	 * @throws FileNotFoundException
+	 */
 	public static void outputSimulationReport(String filename, List<String> mutationContents, List<Result> simulationResults) throws FileNotFoundException {
 		// first add some more header info in the csv
 		var header = mutationContents.get(0);

@@ -1,7 +1,7 @@
 Compilation Succeed
 -----------------------------------------------
 Test Successful: false
-5 Test run in 12ms. Passed 4, Ignored 0, Failed 1
+5 Test run in 21ms. Passed 4, Ignored 0, Failed 1
 Test cases killed mutants: 
 MultiplyTest(TestMethodsCalTest): expected:<2.0> but was:<-1.0>
 

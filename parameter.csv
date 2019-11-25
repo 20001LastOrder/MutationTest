@@ -1,7 +1,8 @@
-﻿MUTANT_RULE,mutationRule.txt
-ORIGINAL,calculator/Calculator.java
-TEST,TestMethodsCalTest.java
-MUTANT_INFO,result.csv
-SOURCE_PATH,./
-CLASS_PATH,binary/
-EXTERNAL_LIB,./lib/*
+﻿mutantRule,mutationRule.txt
+originalFile,calculator/Calculator.java
+testFile,TestMethodsCalTest.java
+mutantInfoOutput,./testProject/result.csv
+sourcePath,./testProject/src/
+classPath,./testProject/bin/
+externalLib,./lib/*
+testPath,./testProject/test/

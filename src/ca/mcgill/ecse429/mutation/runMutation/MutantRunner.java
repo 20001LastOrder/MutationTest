@@ -30,7 +30,7 @@ public class MutantRunner {
 		this.originalClassName = originalClassName;
 		this.classPathFolder = new File(classPathFolder);
 		this.externalLibPath = externalLibPath;
-		this.testClass = testClass.replace(".java", "");
+		this.testClass = testClass.replace(".java", "").replaceAll("\\/|\\\\", ".");
 		compiler = ToolProvider.getSystemJavaCompiler();
 	}
 
@@ -80,19 +80,19 @@ public class MutantRunner {
 		
 	}
 	
-	public void compileTest(String fileDir, String testPath) {
+	public void compileTest(String fileDir, String testFolder, String testName) {
 		//try to compile code
 		var classPaths = buildClassPath(externalLibPath, classPathFolder.toString());
-		String[] files = {"-cp", classPaths, fileDir + originalClassName, testPath};
+		String[] files = {"-cp", classPaths, fileDir + originalClassName, testFolder + testName};
 		
 		if(!compile(files, null, null)) {
 			System.out.println("Failed");
 		}else {
 			System.out.println("Test Compile Successfull");
 			// get directory url
-			var testFile = new File(testPath);
+			var testFile = new File(testFolder);
 			try {
-				testFileURL = testFile.getParentFile().toURI().toURL();
+				testFileURL = testFile.toURI().toURL();
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

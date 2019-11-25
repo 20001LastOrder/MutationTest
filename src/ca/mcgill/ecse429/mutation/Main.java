@@ -11,21 +11,18 @@ import ca.mcgill.ecse429.mutation.runMutation.ThreadedSimulator;
 
 public class Main {
 	public static final String MUTANT_RULE = "mutationRule.txt";
-	public static final String ORIGINAL = "calculator/Calculator.java";
-	public static final String TEST = "TestMethodsCalTest.java";
-	public static final String MUTANT_INFO = "result.csv";
-	public static final String SOURCE_PATH = "./";
-	public static final String CLASS_PATH = "binary/";
-	public static final String EXTERNAL_LIB = "./lib/*";
-	public static void main(String[] args) throws MalformedURLException {
-		System.out.println("Start generating mutants for " + ORIGINAL);
-		var mutationContents = GenerateMutantInformation(MUTANT_RULE, ORIGINAL, MUTANT_INFO);
+
+	public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException{
+		var parameter = Utils.readParameters("./parameter.csv");
+		
+		System.out.println("Start generating mutants for " + parameter.originalFile);
+		var mutationContents = GenerateMutantInformation(parameter.sourcePath, MUTANT_RULE, parameter.originalFile, parameter.mutantInfoOutput);
 		System.out.println("Generated Mutants informaiton in " + MUTANT_RULE);
-		int mutantSize = GenerateMutantFiles(ORIGINAL, MUTANT_INFO);
+		int mutantSize = GenerateMutantFiles(parameter.sourcePath, parameter.originalFile, parameter.mutantInfoOutput);
 		System.out.println("Generated Mutants files in folder \"Mutants\"");
 		
-		var mutantRunner = new MutantRunner(ORIGINAL, TEST,CLASS_PATH, "./lib/*", mutantSize);
-		mutantRunner.compileTest("Mutants/Original/", "test/"+TEST);
+		var mutantRunner = new MutantRunner(parameter.originalFile, parameter.testFile,parameter.classPath, "./lib/*", mutantSize);
+		mutantRunner.compileTest("Mutants/Original/", parameter.testPath, parameter.testFile);
 		
 		var mutantFolders = new ArrayList<String>();
 		//run original
@@ -50,9 +47,9 @@ public class Main {
 		
 	}
 	
-	public static List<String> GenerateMutantInformation(String mutationRuleFilename, String originalFilename, String mutantFilename) {
+	public static List<String> GenerateMutantInformation(String sourcePath, String mutationRuleFilename, String originalFilename, String mutantFilename) {
 		MutantGenerator m = new MutantGenerator(mutationRuleFilename);
-		var result = m.GenerateMutationFromFile(Main.SOURCE_PATH + originalFilename);
+		var result = m.GenerateMutationFromFile(sourcePath + originalFilename);
 		var stringResult = new ArrayList<String>();
 		stringResult.add(MutantInformation.FILE_HEADER);
 		stringResult.addAll(result.stream().map(MutantInformation::toString).collect(Collectors.toList()));
@@ -67,9 +64,9 @@ public class Main {
 		return stringResult;
 	}
 	
-	public static int GenerateMutantFiles(String originalFileName, String mutantInfoFileName) {
+	public static int GenerateMutantFiles(String sourcePath, String originalFileName, String mutantInfoFileName) {
 		var mutantInfos = Utils.readMutantInfomation(mutantInfoFileName);
-		Utils.generateMutantFiles(mutantInfos, originalFileName);
+		Utils.generateMutantFiles(sourcePath, mutantInfos, originalFileName);
 		return mutantInfos.size();
 	}
 }

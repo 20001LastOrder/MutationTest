@@ -1,0 +1,8 @@
+﻿mutantRule,mutationRule.txt
+originalFile,calculator/ExpressionParser.java
+testFile,TestMethodsCalTest.java
+mutantInfoOutput,./result.csv
+sourcePath,./src/
+classPath,./bin/
+externalLib,./lib/*
+testPath,./test/
