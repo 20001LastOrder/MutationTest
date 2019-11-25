@@ -1,8 +1,0 @@
-﻿mutantRule,mutationRule.txt
-originalFile,calculator/Calculator.java
-testFile,TestMethodsCalTest.java
-mutantInfoOutput,./testProject/result.csv
-sourcePath,./testProject/src/
-classPath,./testProject/bin/
-externalLib,./lib/*
-testPath,./testProject/test/
