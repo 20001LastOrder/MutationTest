@@ -1,0 +1,30 @@
+Id, Line, CharNumber, Original, Mutant, Status, Killed by
+0, 14, 41, ++, --, Killed, DivisionTest(TestMethodsCalTest); MinusTest(TestMethodsCalTest); emptyStringTest(TestMethodsCalTest); MultiplyTest(TestMethodsCalTest); AddTest(TestMethodsCalTest); 
+1, 14, 41, +, -, Killed, Compiler
+2, 14, 41, +, *, Killed, Compiler
+3, 14, 41, +, /, Killed, Compiler
+4, 14, 42, +, -, Killed, Compiler
+5, 14, 42, +, *, Killed, Compiler
+6, 14, 42, +, /, Killed, Compiler
+7, 67, 18, *, +, Killed, Compiler
+8, 67, 18, *, -, Killed, Compiler
+9, 67, 18, *, /, Killed, Compiler
+10, 68, 18, /, +, Killed, Compiler
+11, 68, 18, /, -, Killed, Compiler
+12, 68, 18, /, *, Killed, Compiler
+13, 71, 18, +, -, Killed, Compiler
+14, 71, 18, +, *, Killed, Compiler
+15, 71, 18, +, /, Killed, Compiler
+16, 72, 18, -, +, Killed, Compiler
+17, 72, 18, -, *, Killed, Compiler
+18, 72, 18, -, /, Killed, Compiler
+Origin, none, none, none, none, Alive, None
+
+Type, Count
+--, 1
+*, 5
++, 3
+-, 5
+/, 5
+Conclusion, 19 mutants are killed out of 19 mutants
+Mutation Ratio, 1.0

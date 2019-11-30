@@ -1,0 +1,5 @@
+Compilation Succeed
+-----------------------------------------------
+Test Successful: true
+5 Test run in 16ms. Passed 5, Ignored 0, Failed 0
+

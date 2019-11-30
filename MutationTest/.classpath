@@ -12,7 +12,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/chenp/OneDrive - McGill University/Documents/Fall 2019/ECSE 429/Assignment/MutationTest/lib/junit-4.12.jar" sourcepath="C:/Users/chenp/.m2/repository/junit/junit/4.12/junit-4.12-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/chenp/OneDrive - McGill University/Documents/Fall 2019/ECSE 429/Assignment/MutationTest/lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chenp/OneDrive - McGill University/Documents/Fall 2019/ECSE 429/Assignment/MutationTest/MutationTest/lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chenp/OneDrive - McGill University/Documents/Fall 2019/ECSE 429/Assignment/MutationTest/MutationTest/lib/junit-4.12.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

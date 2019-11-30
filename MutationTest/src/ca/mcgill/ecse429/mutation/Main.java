@@ -1,7 +1,6 @@
 package ca.mcgill.ecse429.mutation;
 
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +34,7 @@ public class Main {
 		String sutInformation = "Origin, none, none, none, none";
 		mutationContents.add(mutantSize+1, sutInformation);
 		// run the mutants in parallel
-		var runner = new ThreadedSimulator(mutantRunner, mutantFolders, 3);
+		var runner = new ThreadedSimulator(mutantRunner, mutantFolders, Integer.parseInt(parameter.testThreads));
 		try {
 			runner.start();
 			Utils.outputSimulationReport("Mutants/report.csv", mutationContents, mutantRunner.getResults());

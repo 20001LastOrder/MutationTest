@@ -1,0 +1,5 @@
+Mutants\Mutant_18\calculator\ExpressionParser.java:72: error: duplicate case label
+            case '/':
+            ^
+1 error
+Compilation Failed, Mutant killed by the compiler

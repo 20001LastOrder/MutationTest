@@ -9,4 +9,5 @@ public class MutationParameter {
 	public String classPath;
 	public String externalLib;
 	public String testPath;
+	public String testThreads;
 }

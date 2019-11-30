@@ -1,0 +1,11 @@
+Compilation Succeed
+-----------------------------------------------
+Test Successful: false
+5 Test run in 94ms. Passed 0, Ignored 0, Failed 5
+Test cases killed mutants: 
+DivisionTest(TestMethodsCalTest): Index -1 out of bounds for length 3
+MinusTest(TestMethodsCalTest): Index -1 out of bounds for length 3
+emptyStringTest(TestMethodsCalTest): Unexpected exception, expected<java.util.EmptyStackException> but was<java.lang.ArrayIndexOutOfBoundsException>
+MultiplyTest(TestMethodsCalTest): Index -1 out of bounds for length 3
+AddTest(TestMethodsCalTest): Index -1 out of bounds for length 3
+
